@@ -48,26 +48,22 @@ button{
     background-color: #999;
 }
 
-.first-row :last-child{
+.operation{
     margin: 0.8px 0 0.8px 0;
     background-color: orange;
     color: white;
 }
 
-.main-row :last-child{
-    margin: 0.8px 0 0.8px 0;
-    background-color: orange;
-    color: white;
+.operation:hover{
+    background-color: rgb(250, 178, 44);
+}
+
+.operation:action{
+    background-color: orangered;
 }
 
 .bottom-row :first-child{
     flex: 3;
-}
-
-.bottom-row :last-child{
-    margin: 0.8px 0 0.8px 0.1px;
-    background-color: orange;
-    color: white;   
 }
 
 button:hover{
