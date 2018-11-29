@@ -15,7 +15,6 @@ body{
     justify-items: space-evenly;
     font-family: monospace;
     font-size: 32px;
-    color: black;
 }
 
 .result {
@@ -61,6 +60,7 @@ button{
     padding: 0;
     flex: 1;
     background-color: #999;
+    color: black;
 }
 
 button:hover{
