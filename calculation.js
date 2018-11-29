@@ -3,16 +3,23 @@ var screen = document.querySelector(".result");
 var result = "0";
 var lastOperand = null;
 
-init();
+// init();
 
-function init(){
-    document.querySelector(".calculator").addEventListener("click", 
-    function(event) {
-        if(event.target.className !== "result"){
-            handleClick(event.target.innerText);
-        }
-    });
-}
+
+$("button").click(function(){
+    handleClick($(this).text());
+    $(".result").text(result);
+});
+
+
+// function init(){
+//     document.querySelector(".calculator").addEventListener("click", 
+//     function(event) {
+//         if(event.target.className !== "result"){
+//             handleClick(event.target.innerText);
+//         }
+//     });
+// }
 
 function handleClick(text){
     if(isNaN(parseInt(text))){
