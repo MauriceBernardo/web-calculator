@@ -43,7 +43,7 @@ function handleSymbol(symbol){
             }
             applyMath(lastOperand);
             lastOperand = null;
-            result = storedValue;
+            result = storedValue.toString();
             storedValue = 0;
             break;
         
