@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 var storedValue = 0;
 var screen = document.querySelector(".result");
 var result = "0";
