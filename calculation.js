@@ -8,7 +8,9 @@ init();
 function init(){
     document.querySelector(".calculator").addEventListener("click", 
     function(event) {
-        handleClick(event.target.innerText);
+        if(event.target.className !== "result"){
+            handleClick(event.target.innerText);
+        }
     });
 }
 
