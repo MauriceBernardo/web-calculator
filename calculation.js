@@ -1,17 +1,117 @@
-var storedValue = 0;
-var screen = document.querySelector(".result");
-var result = "0";
-var lastOperand = null;
+/* Variable for vanilla and jQuery */
+
+// var storedValue = 0;
+// var screen = document.querySelector(".result");
+// var result = "0";
+// var lastOperand = null;
+
+/* code for jQuery */
+
+// $("button").click(function(){
+//     handleClick($(this).text());
+//     $(".result").text(result);
+// });
+
+new Vue({
+    el: ".calculator",
+    data(){
+        return {
+            result: 0,
+            lastOperand : null,
+            storedValue : 0
+        }
+    },
+    methods: {
+        handleClick(e){
+            if(isNaN(parseInt(e.target.innerText))){
+                this.handleSymbol(e.target.innerText);
+            } else {
+                this.handleNumber(e.target.innerText);
+            }
+        },
+    
+
+        handleSymbol(symbol){
+            switch (symbol) {
+                case "C":
+                    this.result = 0;
+                    this.storedValue = 0;
+                    break;
+            
+                case "←":
+                    if (this.result.length == 1) {
+                        this.result = 0;
+                    } else {
+                        this.result = this.result.substring(0,this.result.length-1);
+                    }
+                    break;
+        
+                case "=":
+                    if(this.lastOperand === null){
+                        this.result = "0";
+                    }
+                    this.applyMath(this.lastOperand);
+                    this.lastOperand = null;
+                    this.result = this.storedValue.toString();
+                    this.storedValue = 0;
+                    break;
+                
+                case "+":
+                case "-":
+                case "x":
+                case "÷":
+                    this.handleMath(symbol);
+                    break;
+            }
+        },
+        
+        handleNumber(number){
+            if(this.result === 0){
+                this.result = number;
+            } else {
+                this.result += number;
+            }
+        },
+        
+        handleMath(operand){
+            if(parseInt(this.result) === 0){
+                this.result = 0;
+            }
+        
+            if(this.storedValue === 0){
+                this.storedValue = parseInt(this.result);
+            } else {
+                this.applyMath(operand);
+            }
+        
+            this.lastOperand = operand;
+            this.result = 0;
+        },
+        
+        applyMath(operand){
+            switch (operand) {
+                case "+":
+                    this.storedValue += parseInt(this.result);
+                    break;
+                case "-":
+                    this.storedValue -= parseInt(this.result);
+                    break;
+                case "x":
+                    this.storedValue *= parseInt(this.result);
+                    break;
+                case "÷":
+                    this.storedValue /= parseInt(this.result);
+                    break;
+            }
+        },
+    }
+
+})
+
+
+/* code for vanilla */
 
 // init();
-
-
-$("button").click(function(){
-    handleClick($(this).text());
-    $(".result").text(result);
-});
-
-
 // function init(){
 //     document.querySelector(".calculator").addEventListener("click", 
 //     function(event) {
@@ -21,90 +121,5 @@ $("button").click(function(){
 //     });
 // }
 
-function handleClick(text){
-    if(isNaN(parseInt(text))){
-        handleSymbol(text);
-    } else {
-        handleNumber(text);
-    }
 
-    rerender();
-}
 
-function handleSymbol(symbol){
-    switch (symbol) {
-        case "C":
-            result = "0";
-            storedValue = 0;
-            break;
-    
-        case "←":
-            if (result.length == 1) {
-                result = "0";
-            } else {
-                result = result.substring(0,result.length-1);
-            }
-            break;
-
-        case "=":
-            if(lastOperand === null){
-                result = "0";
-            }
-            applyMath(lastOperand);
-            lastOperand = null;
-            result = storedValue.toString();
-            storedValue = 0;
-            break;
-        
-        case "+":
-        case "-":
-        case "x":
-        case "÷":
-            handleMath(symbol);
-            break;
-    }
-}
-
-function handleNumber(number){
-    if(result === "0"){
-        result = number;
-    } else {
-        result += number;
-    }
-}
-
-function handleMath(operand){
-    if(parseInt(result) === 0){
-        result = "0";
-    }
-
-    if(storedValue === 0){
-        storedValue = parseInt(result);
-    } else {
-        applyMath(operand);
-    }
-
-    lastOperand = operand;
-    result = "0";
-}
-
-function applyMath(operand){
-    switch (operand) {
-        case "+":
-            storedValue += parseInt(result);
-            break;
-        case "-":
-            storedValue -= parseInt(result);
-            break;
-        case "x":
-            storedValue *= parseInt(result);
-            break;
-        case "÷":
-            storedValue /= parseInt(result);
-            break;
-    }
-}
-
-function rerender() {
-    screen.innerText = result;
-} 
