@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 <template>
   <div class="calculator" v-on:click="handleClick">
     <div class="result">{{result}}</div>
