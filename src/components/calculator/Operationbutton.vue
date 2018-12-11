@@ -1,83 +1,80 @@
 <template>
-  <baseButton 
-    :symbol="symbol" 
-    class="operationButton"
-    @clicked="handleOperation"/>
+  <baseButton :symbol="symbol" class="operationButton" @clicked="handleOperation"/>
 </template>
 
 <script>
-import baseButton from './Basebutton.vue'
+import baseButton from "./Basebutton.vue";
 export default {
-  name: 'Operationbutton',
+  name: "Operationbutton",
   components: {
     baseButton
   },
   props: {
     symbol: {
       type: String,
-      default: ''
+      default: ""
     },
     calcData: {
       type: Object,
-      default: () => (
-        {result: '0',
+      calcData: {
+        result: "0",
         lastOperand: null,
         storedValue: 0
-        })
+      }
     }
   },
   methods: {
     handleOperation() {
-      if (this.symbol === '=') {
-        this.handleEqual()
+      if (this.symbol === "=") {
+        this.handleEqual();
       } else {
-        this.handleMath()
+        this.handleMath();
       }
-      this.$emit('operationHandled', this.calcData)
+      this.$emit("operationHandled", this.calcData);
     },
 
     handleEqual() {
       if (this.calcData.lastOperand === null) {
-        this.calcData.result = '0'
+        this.calcData.result = "0";
       }
-      this.applyMath(this.calcData.lastOperand)
-      this.calcData.lastOperand = null
-      this.calcData.result = String(this.calcData.storedValue)
-      this.calcData.storedValue = 0
+      this.applyMath(this.calcData.lastOperand);
+      this.calcData.lastOperand = null;
+      this.calcData.result = String(this.calcData.storedValue);
+      this.calcData.storedValue = 0;
     },
 
     handleMath() {
       if (Number(this.calcData.result) === 0) {
-        this.calcData.result = '0'
+        this.calcData.result = "0";
       }
       if (this.calcData.storedValue === 0) {
-        this.calcData.storedValue = Number(this.calcData.result)
+        this.calcData.storedValue = Number(this.calcData.result);
       } else {
-        this.applyMath(this.symbol)
+        this.applyMath(this.symbol);
       }
 
-      this.calcData.lastOperand = this.symbol
-      this.calcData.result = '0'
+      this.calcData.lastOperand = this.symbol;
+      this.calcData.result = "0";
     },
 
-    applyMath(operand) {      
+    applyMath(operand) {
       switch (operand) {
-        case '+':
-          this.calcData.storedValue += Number(this.calcData.result)
-          break
-        case '-':
-          this.calcData.storedValue -= Number(this.calcData.result)
-          break
-        case 'x':
-          this.calcData.storedValue *= Number(this.calcData.result)
-          break
-        case '÷':
-          this.calcData.storedValue /= Number(this.calcData.result)
-          break
+        case "+":
+          this.calcData.storedValue += Number(this.calcData.result);
+          break;
+        case "-":
+          this.calcData.storedValue -= Number(this.calcData.result);
+          break;
+        case "x":
+          this.calcData.storedValue *= Number(this.calcData.result);
+          break;
+        case "÷":
+          this.calcData.storedValue /= Number(this.calcData.result);
+          break;
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -88,11 +85,10 @@ export default {
 }
 
 .operationButton:hover {
-    background-color: rgb(250, 178, 44);
+  background-color: rgb(250, 178, 44);
 }
 
 .operationButton:active {
-    background-color: rgb(216, 140, 0);
+  background-color: rgb(216, 140, 0);
 }
-
 </style>

@@ -1,35 +1,32 @@
 <template>
-  <Basebutton 
-    :symbol="symbol" 
-    class="clear"
-    @clicked="handleClear"
-  />
+  <Basebutton symbol="C" class="clear" @clicked="handleClear"/>
 </template>
 <script>
-import Basebutton from './Basebutton.vue'
+import Basebutton from "./Basebutton.vue";
 export default {
-  name: 'Clear',
+  name: "Clear",
   components: {
     Basebutton
   },
   props: {
-    symbol: {
-      type: String,
-      default: 'C'
-    },
-    // eslint-disable-next-line vue/require-default-prop
     calcData: {
-      type: Object
+      type: Object,
+      calcData: {
+        result: "0",
+        lastOperand: null,
+        storedValue: 0
+      }
     }
   },
   methods: {
     handleClear() {
-      this.calcData.result = '0'
-      this.calcData.storedValue = 0
-      this.$emit('clearHandled', this.calcData)
+      this.calcData.result = "0";
+      this.calcData.storedValue = 0;
+      this.calcData.lastOperand = null;
+      this.$emit("clearHandled", this.calcData);
     }
   }
-}
+};
 </script>
 
 <style scoped>
