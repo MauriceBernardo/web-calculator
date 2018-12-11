@@ -17,9 +17,13 @@ export default {
       type: String,
       default: ''
     },
-    // eslint-disable-next-line vue/require-default-prop
     calcData: {
-      type: Object
+      type: Object,
+      default: () => (
+        {result: '0',
+        lastOperand: null,
+        storedValue: 0
+        })
     }
   },
   methods: {

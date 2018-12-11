@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .baseButton {
   border: none;
   padding: 0;
@@ -29,14 +29,15 @@ export default {
   background-color: #999;
   color: black;
   margin: 0 0.8px 0 0;
-}
 
-.baseButton:hover {
+  &:hover {
     background-color: #aaa;
-}
+  }
 
-.baseButton:active {
+  &:active {
     background-color: #888;
+  }
+
 }
 
 </style>
