@@ -47,20 +47,20 @@ export default {
     },
 
     handleMath() {
-      if (parseInt(this.calcData.result) === 0) {
+      if (Number(this.calcData.result) === 0) {
         this.calcData.result = '0'
       }
       if (this.calcData.storedValue === 0) {
-        this.calcData.storedValue = parseInt(this.calcData.result)
+        this.calcData.storedValue = Number(this.calcData.result)
       } else {
-        this.calcData.applyMath(this.symbol)
+        this.applyMath(this.symbol)
       }
 
       this.calcData.lastOperand = this.symbol
       this.calcData.result = '0'
     },
 
-    applyMath(operand) {
+    applyMath(operand) {      
       switch (operand) {
         case '+':
           this.calcData.storedValue += Number(this.calcData.result)
